@@ -28,7 +28,6 @@ int set = 20; //set the distance to be 20cm
 int bt_ir_data; // variable to receive data from the serial port and IRremote
 int Speed = 130; // speed of the motor
 int mode = 0; // mode of working type
-int IR_data;
 
 void setup() { // put your setup code here, to run once
 
@@ -205,6 +204,7 @@ void backward() {
 }
 
 long IRremote_data() {
+  int IR_data;
   if (results.value == 0xFF02FD) {
     IR_data = 1;
   }
