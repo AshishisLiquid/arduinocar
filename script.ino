@@ -86,7 +86,7 @@ void loop() {
 
   if (bt_ir_data == 8) {
     mode = 0;  // Manual Android Application and IR Remote Control Command
-    Stop();
+    stop();
   }
   else if (bt_ir_data == 9) {
     mode = 1;  // Auto Line Follower Command
@@ -135,7 +135,7 @@ void keyControlCommand() {
     turnRight(); // If the bt_data is '4' the motor will turn right
   }
   else if (bt_ir_data == 5) {
-    Stop(); // If the bt_data '5' the motor will Stop
+    stop(); // If the bt_data '5' the motor will stop
   }
 }
 
@@ -259,7 +259,7 @@ void compareDistance() {
 }
 
 void checkSide() {
-  Stop();
+  stop();
   delay(100);
   for (int angle = 70; angle <= 140; angle += 5)  {
     servoPulse(servo, angle);
@@ -301,7 +301,7 @@ void turnLeft() {
   digitalWrite(in4, HIGH);  // Left Motor backward Pin
 }
 
-void Stop() {
+void stop() {
   digitalWrite(in1, LOW); // Right Motor forward Pin
   digitalWrite(in2, LOW); // Right Motor backward Pin
   digitalWrite(in3, LOW); // Left Motor backward Pin
