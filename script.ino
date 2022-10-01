@@ -102,72 +102,99 @@ void loop() {
   analogWrite(enB, Speed); // Write The Duty Cycle 0 to 255 Enable Pin B for Motor2 Speed
 
   if (mode == 0) {
-    //===============================================================================
-    //                          Key Control Command
-    //===============================================================================
-    if (bt_ir_data == 1) {
-      forword();  // if the bt_data is '1' the DC motor will go forward
-    }
-    else if (bt_ir_data == 2) {
-      backword(); // if the bt_data is '2' the motor will Reverse
-    }
-    else if (bt_ir_data == 3) {
-      turnLeft(); // if the bt_data is '3' the motor will turn left
-    }
-    else if (bt_ir_data == 4) {
-      turnRight(); // if the bt_data is '4' the motor will turn right
-    }
-    else if (bt_ir_data == 5) {
-      Stop();  // if the bt_data '5' the motor will Stop
-    }
-
-    //===============================================================================
-    //                          Voice Control Command
-    //===============================================================================
-    else if (bt_ir_data == 6) {
-      turnLeft();
-      delay(400);
-      bt_ir_data = 5;
-    }
-    else if (bt_ir_data == 7) {
-      turnRight();
-      delay(400);
-      bt_ir_data = 5;
-    }
+    robotic_car_control();
   }
-
-  if (mode == 1) {
-    //===============================================================================
-    //                          Line Follower Control
-    //===============================================================================
-
-    if (digitalRead(L_S) == HIGH  &&  digitalRead(R_S) == LOW) {
-
-      turnRight();
-    }
-    else if (digitalRead(R_S) == HIGH && digitalRead(L_S) == LOW) {
-
-      turnLeft();
-
-    } else
-      forword();
+  else if (mode == 1) {
+    line_follower_control();
   }
-
-  if (mode == 2) {
-    //===============================================================================
-    //                          Obstacle Avoiding Control
-    //===============================================================================
-    distance_F = Ultrasonic_read();
-    Serial.print("S="); Serial.println(distance_F);
-    if (distance_F > set) {
-      forword();
-    }
-    else {
-      Check_side();
-    }
+  else if (mode == 2) {
+    obstacle_avoiding_control();
   }
 
   delay(10);
+}
+
+void robotic_car_control() {
+  key_control_command();
+  voice_control_command();
+}
+
+void key_control_command() {
+  //===============================================================================
+  //                          Key Control Command
+  //===============================================================================
+  if (bt_ir_data == 1)
+  {
+    forward(); // if the bt_data is '1' the DC motor will go forward
+  }
+  else if (bt_ir_data == 2)
+  {
+    backword(); // if the bt_data is '2' the motor will Reverse
+  }
+  else if (bt_ir_data == 3)
+  {
+    turnLeft(); // if the bt_data is '3' the motor will turn left
+  }
+  else if (bt_ir_data == 4)
+  {
+    turnRight(); // if the bt_data is '4' the motor will turn right
+  }
+  else if (bt_ir_data == 5)
+  {
+    Stop(); // if the bt_data '5' the motor will Stop
+  }
+}
+
+void voice_control_command() {
+  //===============================================================================
+  //                          Voice Control Command
+  //===============================================================================
+  else if (bt_ir_data == 6)
+  {
+    turnLeft();
+    delay(400);
+    bt_ir_data = 5;
+  }
+  else if (bt_ir_data == 7)
+  {
+    turnRight();
+    delay(400);
+    bt_ir_data = 5;
+  }
+}
+
+void line_follower_control() {
+  //===============================================================================
+  //                          Line Follower Control
+  //===============================================================================
+
+  if (digitalRead(L_S) == HIGH && digitalRead(R_S) == LOW)
+  {
+    turnRight();
+  }
+  else if (digitalRead(R_S) == HIGH && digitalRead(L_S) == LOW)
+  {
+    turnLeft();
+  }
+  else
+    forward();
+}
+
+void obstacle_avoiding_control() {
+  //===============================================================================
+  //                          Obstacle Avoiding Control
+  //===============================================================================
+  distance_F = Ultrasonic_read();
+  Serial.print("S=");
+  Serial.println(distance_F);
+  if (distance_F > set)
+  {
+    forward();
+  }
+  else
+  {
+    Check_side();
+  }
 }
 
 void backword() {
