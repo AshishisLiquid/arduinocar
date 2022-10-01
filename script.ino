@@ -129,7 +129,7 @@ void key_control_command() {
   }
   else if (bt_ir_data == 2)
   {
-    backword(); // if the bt_data is '2' the motor will Reverse
+    backward(); // if the bt_data is '2' the motor will Reverse
   }
   else if (bt_ir_data == 3)
   {
@@ -197,7 +197,7 @@ void obstacle_avoiding_control() {
   }
 }
 
-void backword() {
+void backward() {
   digitalWrite(in1, LOW); //Right Motor Forward Pin
   digitalWrite(in2, HIGH); // Right Motor Backward Pin
   digitalWrite(in3, LOW); // Left Motor Forward
@@ -261,7 +261,7 @@ void compareDistance() {
     delay(350);
   }
   else {
-    backword();
+    backward();
     delay(300);
     turnRight();
     delay(600);
@@ -290,30 +290,30 @@ void Check_side() {
   compareDistance();
 }
 
-void forword() { //forword
-  digitalWrite(in1, HIGH); //Right Motor forword Pin
-  digitalWrite(in2, LOW);  //Right Motor backword Pin
-  digitalWrite(in3, HIGH);  //Left Motor forword Pin
-  digitalWrite(in4, LOW); //Left Motor backword Pin
+void forward() { //forward
+  digitalWrite(in1, HIGH); //Right Motor forward Pin
+  digitalWrite(in2, LOW);  //Right Motor backward Pin
+  digitalWrite(in3, HIGH);  //Left Motor forward Pin
+  digitalWrite(in4, LOW); //Left Motor backward Pin
 }
 
 void turnRight() { //turnRight
-  digitalWrite(in1, LOW);  //Right Motor forword Pin
-  digitalWrite(in2, HIGH); //Right Motor backword Pin
-  digitalWrite(in3, HIGH);  //Left Motor forword Pin
-  digitalWrite(in4, LOW); //Left Motor backword Pin
+  digitalWrite(in1, LOW);  //Right Motor forward Pin
+  digitalWrite(in2, HIGH); //Right Motor backward Pin
+  digitalWrite(in3, HIGH);  //Left Motor forward Pin
+  digitalWrite(in4, LOW); //Left Motor backward Pin
 }
 
 void turnLeft() { //turnLeft
-  digitalWrite(in1, HIGH); //Right Motor forword Pin
-  digitalWrite(in2, LOW);  //Right Motor backword Pin
-  digitalWrite(in3, LOW); //Left Motor forword Pin
-  digitalWrite(in4, HIGH);  //Left Motor backword Pin
+  digitalWrite(in1, HIGH); //Right Motor forward Pin
+  digitalWrite(in2, LOW);  //Right Motor backward Pin
+  digitalWrite(in3, LOW); //Left Motor forward Pin
+  digitalWrite(in4, HIGH);  //Left Motor backward Pin
 }
 
 void Stop() { //stop
-  digitalWrite(in1, LOW); //Right Motor forword Pin
-  digitalWrite(in2, LOW); //Right Motor backword Pin
-  digitalWrite(in3, LOW); //Left Motor backword Pin
-  digitalWrite(in4, LOW); //Left Motor forword Pin
+  digitalWrite(in1, LOW); //Right Motor forward Pin
+  digitalWrite(in2, LOW); //Right Motor backward Pin
+  digitalWrite(in3, LOW); //Left Motor backward Pin
+  digitalWrite(in4, LOW); //Left Motor forward Pin
 }
