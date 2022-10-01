@@ -49,7 +49,7 @@ void setup() { // Put your setup code here, to run once
 
   Serial.begin(9600); // Start serial communication at 9600bps
   BT_Serial.begin(9600);
-
+//Angle of servo motor
   pinMode(servo, OUTPUT);
 
   for (int angle = 70; angle <= 140; angle += 5)  {
@@ -272,7 +272,7 @@ void checkSide() {
   delay(300);
   compareDistance();
 }
-
+//motion of the car
 void forward() {
   setMotorPins(HIGH, LOW, HIGH, LOW);
 }
