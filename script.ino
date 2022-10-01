@@ -62,7 +62,7 @@ void setup() { // Put your setup code here, to run once
   for (int angle = 0; angle <= 70; angle += 5)  {
     servoPulse(servo, angle);
   }
-  delay(500);
+  delay(500);//delay of 500ms
 }
 
 
@@ -81,7 +81,7 @@ void loop() {
     bt_ir_data = irRemoteData();
     Serial.println(bt_ir_data);
     irrecv.resume(); // Receive the next value
-    delay(100);
+    delay(100);//delay of 100ms
   }
 
   if (bt_ir_data == 8) {
@@ -101,13 +101,13 @@ void loop() {
   analogWrite(enB, Speed); // Write The Duty Cycle 0 to 255 Enable Pin B for Motor2 Speed
 
   if (mode == 0) {
-    roboticCarControl();
+    roboticCarControl();// Manual Android Application and IR Remote Control Command
   }
   else if (mode == 1) {
-    lineFollowerControl();
+    lineFollowerControl();//line follower function
   }
   else if (mode == 2) {
-    obstacleAvoidingControl();
+    obstacleAvoidingControl();//obstacle avoiding function
   }
 
   delay(10);
