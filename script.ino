@@ -184,13 +184,6 @@ void obstacleAvoidingControl() {
     checkSide();
 }
 
-void backward() {
-  digitalWrite(in1, LOW); //Right Motor Forward Pin
-  digitalWrite(in2, HIGH); // Right Motor Backward Pin
-  digitalWrite(in3, LOW); // Left Motor Forward
-  digitalWrite(in4, HIGH); // Left Motor Backward
-}
-
 long irRemoteData() {
   int IR_data;
 
@@ -281,29 +274,28 @@ void checkSide() {
 }
 
 void forward() {
-  digitalWrite(in1, HIGH); // Right Motor forward Pin
-  digitalWrite(in2, LOW);  // Right Motor backward Pin
-  digitalWrite(in3, HIGH);  // Left Motor forward Pin
-  digitalWrite(in4, LOW); // Left Motor backward Pin
+  setMotorPins(HIGH, LOW, HIGH, LOW);
+}
+
+void backward() {
+  setMotorPins(LOW, HIGH, LOW, HIGH);
 }
 
 void turnRight() {
-  digitalWrite(in1, LOW);  // Right Motor forward Pin
-  digitalWrite(in2, HIGH); // Right Motor backward Pin
-  digitalWrite(in3, HIGH);  // Left Motor forward Pin
-  digitalWrite(in4, LOW); // Left Motor backward Pin
+  setMotorPins(LOW, HIGH, HIGH, LOW);
 }
 
 void turnLeft() {
-  digitalWrite(in1, HIGH); // Right Motor forward Pin
-  digitalWrite(in2, LOW);  // Right Motor backward Pin
-  digitalWrite(in3, LOW); // Left Motor forward Pin
-  digitalWrite(in4, HIGH);  // Left Motor backward Pin
+  setMotorPins(HIGH, LOW, LOW, HIGH);
 }
 
 void stop() {
-  digitalWrite(in1, LOW); // Right Motor forward Pin
-  digitalWrite(in2, LOW); // Right Motor backward Pin
-  digitalWrite(in3, LOW); // Left Motor backward Pin
-  digitalWrite(in4, LOW); // Left Motor forward Pin
+  setMotorPins(LOW, LOW, LOW, LOW);
+}
+
+void setMotorPins(int rightForward, int rightBackward, int leftForward, int leftBackward) {
+  digitalWrite(in1, rightForward);
+  digitalWrite(in2, rightBackward);
+  digitalWrite(in3, leftForward);
+  digitalWrite(in4, leftBackward);
 }
